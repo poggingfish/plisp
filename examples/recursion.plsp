@@ -1,0 +1,11 @@
+(exec (std.plsp))
+(set(ctr)(0))
+(def (recursive)(
+    (call(ctr)(inc))
+    (call(get(ctr))(println))
+    (if(!=)(get(ctr))(10)(call(recursive)))
+))
+
+(
+    call(recursive)
+)

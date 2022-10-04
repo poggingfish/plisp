@@ -1,0 +1,38 @@
+(set (passed)(0))
+(set (failed)(0))
+(def (test_pass)(1)(
+    (set(name)(swap))
+    (print(Test\s))
+    (print(get(name)))
+    (print(\spassed!\n))
+    (set(passed)(+(get(passed))(1)))
+))
+(def (test_failed)(1)(
+    (set(name)(swap))
+    (print(Test\s))
+    (print(get(name)))
+    (print(\sFailed\s\n))
+    (set(passed)(+(get(passed))(1)))
+))
+(def (test)(3) (
+    (set(expected)(swap))
+    (set(var)(swap))
+    (set(name)(swap))
+    (if (==) (get(get(var))) (get(expected)) (
+        (print(\wTest\s))
+        (print(get(name)))
+        (print(\spassed\n))
+        (set(passed)(+(get(passed))(1)))
+    )(
+        (print(\wTest\s))
+        (print(get(name)))
+        (print(\sfailed\n))
+        (set(failed)(+(get(failed))(1)))
+    ))
+))
+(def (results)(0)(
+    (print(Passed\s tests:\s))
+    (call(get(passed))(println))
+    (print(Failed\s tests:\s))
+    (call(get(failed))(println))
+))
