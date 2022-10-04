@@ -266,9 +266,14 @@ def recurse(tree, stack=[]):
     recurses += 1
 def full():
     if len(sys.argv) <= 1:
-        print("Too few arguments.")
-        print("Usage: plisp <file>")
-        return
+        print("Loading repl")
+        while True:
+            x = input("plisp -> ")
+            with open("repl.tmp","w") as t:
+                t.write("("+x+")")
+            prg = load("repl.tmp")
+            i = progtree(prg)
+            print("\n"+str(recurse(i)))         
     program = load(sys.argv[1])
     i = progtree(program)
     recurse(i)
