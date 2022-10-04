@@ -18,7 +18,7 @@ sudo python3 install.py
 ## Hello world:
 ```
 (
-    print(Hello, world!\n)
+    print(Hello,\s world!\n)
 )
 ```
 ## Math:
