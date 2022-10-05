@@ -1,0 +1,64 @@
+import os
+
+
+completer = [
+    "()",
+    "print",
+    "set",
+    "get",
+    "swap",
+    "call",
+    "if",
+    "def",
+    "loop",
+    "drop",
+    "exec",
+    "set!",
+    "==",
+    "!=",
+    ">=",
+    "<="
+]
+def repl():
+    from plsp import progtree,recurse,load
+    import sys
+    from os.path import expanduser
+    if len(sys.argv) <= 1:
+        from prompt_toolkit import PromptSession
+    from prompt_toolkit.history import FileHistory
+    from prompt_toolkit.auto_suggest import AutoSuggestFromHistory       
+    from prompt_toolkit.completion import WordCompleter
+    from prompt_toolkit.formatted_text import HTML
+    from prompt_toolkit.styles.pygments import style_from_pygments_cls
+    from pygments.styles import get_style_by_name    
+    from prompt_toolkit.shortcuts import ProgressBar
+    from prompt_toolkit.shortcuts import clear
+    libs = ["std.plsp","test.plsp","repl.plsp"]
+    clear()
+    print("Loading librarys")
+    with ProgressBar() as pb:
+        for i in pb(libs):
+            with open("repl.tmp","w") as t:
+                t.write(f"(exec({i}))")
+            prg = load("repl.tmp")
+            os.remove("repl.tmp")
+            i = progtree(prg)
+            recurse(i)
+    style = style_from_pygments_cls(get_style_by_name('gruvbox-dark'))
+    def bottom_toolbar():
+        return
+    session = PromptSession(history = FileHistory(expanduser('~/.plisphistory')),)
+    while True:
+        x = session.prompt('plisp → ',completer=WordCompleter(completer,ignore_case=True),
+                        complete_while_typing=True, style=style)
+        if x == "exit":
+            exit(0)
+        with open("repl.tmp","w") as t:
+            t.write("("+x+")")
+        prg = load("repl.tmp")
+        os.remove("repl.tmp")
+        i = progtree(prg)
+        try:
+            print("\n"+str(recurse(i)))
+        except:
+            print("error.")
