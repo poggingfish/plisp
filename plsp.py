@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 import sys
 import decimal
+import os
+import time
 recurses = 0
+histfile = os.path.join(os.path.expanduser("~"), ".plisp-history")
 tokens = {
     "RBRACKET": 0,
     "LBRACKET": 1,
@@ -129,7 +132,11 @@ def progtree(program):
     programtree = programtree.replace("[,","[")
     programtree = programtree.replace(",]","]")
     programtree = programtree[0:-1]
-    i = eval(programtree)
+    try:
+        i = eval(programtree)
+    except:
+        print("Unclosed/Unopened parenthesis")
+        return None
     return i
 def recurse(tree, stack=[]):
     global recurses
@@ -265,15 +272,9 @@ def recurse(tree, stack=[]):
         vars.update({y:x})
     recurses += 1
 def full():
-    if len(sys.argv) <= 1:
-        print("Loading repl")
-        while True:
-            x = input("plisp -> ")
-            with open("repl.tmp","w") as t:
-                t.write("("+x+")")
-            prg = load("repl.tmp")
-            i = progtree(prg)
-            print("\n"+str(recurse(i)))         
+    if len(sys.argv) < 2:
+        import repltools
+        repltools.repl()
     program = load(sys.argv[1])
     i = progtree(program)
     recurse(i)
