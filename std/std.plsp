@@ -2,7 +2,7 @@
 (set (ℇ)(0.57721566490153286060))
 (
     def (abs)(1)(
-        (set (__abstmp)(swap))
+        (set (__abstmp)(args(0)))
         (set (__abstmp2)(0))
         (
             if (<)(get(__abstmp))(0)(
@@ -11,36 +11,40 @@
                 set(__abstmp2)(get(__abstmp))
             )
         )
-        (get(__abstmp2))
+        (return(get(__abstmp2)))
     )
 )
 (
     def (pow)(2) (
-        (set (__powtmp)(swap))
-        (set (__powtmp2)(swap))
-        (^(get(__powtmp))(get(__powtmp2)))
+        (return(^(args(1))(args(0))))
     )
 )
 (
     def (println)(1) (
-        print(swap)
-        print(\n)
+        (
+            print(args(0))
+        )
+        (
+            print(\n)
+        )
+        (return(args(0)))
     )
 )
 (
     def (inc)(1)(
-        (set (__inc)(swap))
+        (set (__inc)(args(0)))
         (set(
             get(__inc)
         )(
             +(get(get(__inc)))(1)
         ))
+        (return(0))
     )
 )
 (
     def (input)(1)(
-        (set (__printtmp)(swap))
+        (set (__printtmp)(args(0)))
         (print (get(__printtmp)))
-        (in)
+        (return(in))
     )
 )

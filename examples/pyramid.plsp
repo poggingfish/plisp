@@ -1,19 +1,23 @@
 (exec(std.plsp))
 (
-    (call(Rows:\s)(input))
-    (set(rows)(swap))
+    (set(rows)(input(Rows:\s)))
     (set(k)(0))
     (set(ctr)(0))
 )
 (
     loop(get(rows))(
-        (loop(-(-(get(rows))(get(ctr))(swap))(1)(swap))(
+        (
+            (set(loops)(
+                -(get(ctr))(get(rows))
+            ))
+        )
+        (loop(get(loops))(
             print(\s)
         ))
         (loop (+(*(2)(get(ctr)))(1))(
             print(\w*)
         ))
         (print(\w\n))
-        (call(ctr)(inc))
+        (inc(ctr))
     )
 )

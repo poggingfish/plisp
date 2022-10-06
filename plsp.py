@@ -35,7 +35,8 @@ tokens = {
     "INPUT": 26,
     "STRONGSET": 27,
     "RETURN": 28,
-    "SETPOP": 29
+    "SETPOP": 29,
+    "ARGS": 30
 }
 vars = {}
 funcs = {}
@@ -109,6 +110,8 @@ def load(program):
                 toks.append(tokens["RETURN"])
             elif i == "setpop":
                 toks.append(tokens["SETPOP"])
+            elif i == "args":
+                toks.append(tokens["ARGS"])
             else:
                 
                 try:
@@ -138,9 +141,20 @@ def progtree(program):
         print("Unclosed/Unopened parenthesis")
         return None
     return i
-def recurse(tree, stack=[]):
+previous_args = []
+retval = 0
+def getret():
+    global retval
+    return retval
+def setret(val):
+    global retval
+    retval=val
+def recurse(tree, args=[]):
+    global retval
+    global previous_args
     global recurses
     global vars
+    stack = []
     op = ""
     t = 0
     while t < len(tree):
@@ -151,35 +165,46 @@ def recurse(tree, stack=[]):
             z = recurse(tree[t+3])
             if x == "==":
                 if y == z:
-                    recurse(tree[t+4])
+                    t+=4
+                    return recurse(tree[t])
                 else:
-                    recurse(tree[t+5])
+                    t+=5
+                    return recurse(tree[t])
             elif x == "<":
                 if y < z:
-                    recurse(tree[t+4])
+                    t+=4
+                    return recurse(tree[t])
                 else:
-                    recurse(tree[t+5])
+                    t+=5
+                    return recurse(tree[t])
             elif x == ">":
                 if y > z:
-                    recurse(tree[t+4])
+                    t+=4
+                    return recurse(tree[t])
                 else:
-                    recurse(tree[t+5])
+                    t+=5
+                    return recurse(tree[t])
             elif x == "<=":
                 if y <= z:
-                    recurse(tree[t+4])
+                    t+=4
+                    return recurse(tree[t])
                 else:
-                    recurse(tree[t+5])
+                    t+=5
+                    return recurse(tree[t])
             elif x == ">=":
                 if y >= z:
-                    recurse(tree[t+4])
+                    t+=4
+                    return recurse(tree[t])
                 else:
-                    recurse(tree[t+5])
+                    t+=5
+                    return recurse(tree[t])
             elif x == "!=":
                 if y != z:
-                    recurse(tree[t+4])
+                    t+=4
+                    return recurse(tree[t])
                 else:
-                    recurse(tree[t+5])
-            t+=5
+                    t+=5
+                    return recurse(tree[t])
         elif i == tokens["DEF"]:
             name = recurse(tree[t+1])
             args = recurse(tree[t+2])
@@ -199,6 +224,10 @@ def recurse(tree, stack=[]):
              macro = tree[t+2]
              macros.update({name:macro})
              t+=2
+        elif i == tokens["RETURN"]:
+            setret(recurse(tree[t+1]))
+            t+=1
+            return retval
         elif type(i) == list:
             y = recurse(i)
             if y != None:
@@ -209,9 +238,19 @@ def recurse(tree, stack=[]):
             if op == "INT":
                 return decimal.Decimal(tree[t+1].replace("i",""))
             elif op == "VAR":
-                if tree[t+1][1:] in macros:
-                    return recurse(macros[tree[t+1][1:]])
-                return tree[t+1][1:]
+                if tree[t+1][1:] in funcs:
+                    func = tree[t+1][1:]
+                    argc = int(funcs[func]["args"])
+                    args = []
+                    t+=1
+                    for i in range(argc):
+                        args.append(recurse(tree[t+1]))
+                        t+=1
+                    previous_args = args
+                    recurse(funcs[func]["func"])
+                    return getret()
+                else:
+                    return tree[t+1][1:]
         t+=1 
     if op == "PLUS":
         return (stack.pop()+stack.pop())
@@ -245,18 +284,14 @@ def recurse(tree, stack=[]):
         return ">="
     elif op == "NOTEQUAL":
         return "!="
-    elif op == "CALL":
-        func = stack.pop()
-        if len(stack) < funcs[func]["args"]:
-            print("Not enough items on the stack to call: " + func)
-            exit()
-        return recurse(funcs[func]["func"],stack)
     elif op == "DROP":
         stack.pop()
+        return
     elif op == "EXEC":
         x = load(stack.pop())
         i = progtree(x)
         recurse(i)
+        return
     elif op == "SWAP":
         x = stack.pop()
         y = stack.pop()
@@ -264,13 +299,15 @@ def recurse(tree, stack=[]):
         return y
     elif op == "INPUT":
         return decimal.Decimal(input())
-    elif op == "RETURN":
-        return stack.pop()
     elif op == "SET":
         x = stack.pop()
         y = stack.pop()
         vars.update({y:x})
-    recurses += 1
+        return
+    elif op == "ARGS":
+        x = stack.pop()
+        args = previous_args
+        return args[int(x)]
 def full():
     if len(sys.argv) < 2:
         import repltools

@@ -1,0 +1,9 @@
+(exec(std.plsp))
+(
+    def (test)(0)(
+        (return(1))
+    )
+)
+(
+    (print(test))
+)
