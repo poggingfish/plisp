@@ -1,9 +1,4 @@
-(exec(std.plsp))
+(exec(repl.plsp))
 (
-    def (test)(0)(
-        (return(1))
-    )
-)
-(
-    (print(test))
+    (cls)
 )
