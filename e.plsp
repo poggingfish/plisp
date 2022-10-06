@@ -1,4 +1,0 @@
-(exec(repl.plsp))
-(
-    (cls)
-)
