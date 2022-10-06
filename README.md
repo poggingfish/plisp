@@ -35,6 +35,10 @@ sudo python3 install.py
         (print(False\n))
 )
 ```
+## Import libraries
+```
+    (exec(library.plsp))
+```
 <br>
 <br>
 
