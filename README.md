@@ -27,15 +27,7 @@ sudo python3 install.py
     +(5)(2)
 )
 ```
-## Functions:
-```
-    (
-        def(function1)(1)(
-            (return(+(get(args(0)(1)))))
-    )
-    )
-```
-## If staytment:
+## If statement:
 ```
 (
     if(==)(1)(1)
