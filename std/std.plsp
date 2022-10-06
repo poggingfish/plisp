@@ -71,3 +71,26 @@
     ))
     (return(get(__amount)))
 ))
+(def(-=)(2)(
+    (set (__pe)(args(0)))
+    (set (__amount)(args(1)))
+    (loop(get(__amount))(
+        (set(
+            get(__pe)
+        )(
+            -(1)(get(get(__pe)))
+        ))   
+    ))
+    (return(get(__amount)))
+))
+(
+    def(root)(2)(
+        (set(__root)(args(1)))
+        (set(__num)(args(0)))
+        (return(
+            ^(
+                /(get(__num))(1)
+            )(get(__root))
+        ))
+    )
+)
