@@ -14,6 +14,16 @@
 (set (test10)(
     abs(-2)
 ))
+(newarr(t))
+(append(t)(3))
+(set (test11)(
+    pop(t)
+))
+(append(t)(10))
+(setindex(t)(0)(12))
+(set (test12)(
+    index(t)(0)
+))
 (test(5)(test1)(\wAddition))
 (test(9)(test2)(\wAddition\s2))
 (test(300)(test3)(\wMultiplication))
@@ -24,4 +34,6 @@
 (test(762.69746302)(test8)(\wDecimalMult))
 (test(3125)(test9)(\wPower))
 (test(2)(test10)(\wAbs))
+(test(3)(test11)(\wArray\sAppend/Pop))
+(test(12)(test12)(\wArray\sSetIndex/Index))
 (results)
