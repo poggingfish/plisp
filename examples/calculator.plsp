@@ -1,0 +1,7 @@
+(exec(std.plsp))
+(
+    (set(num1)(input(First\s number:)))
+    (set(num2)(input(Second\s number:)))
+    (set(num3)(+(get(num1))(get(num2))))
+    (print(get(num3)))
+)

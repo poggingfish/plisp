@@ -27,6 +27,14 @@ sudo python3 install.py
     +(5)(2)
 )
 ```
+## Functions:
+```
+    (
+        def(function1)(1)(
+            (return(+(get(args(0)(1)))))
+    )
+    )
+```
 ## If staytment:
 ```
 (
@@ -35,6 +43,11 @@ sudo python3 install.py
         (print(False\n))
 )
 ```
+## Import libraries
+```
+    (exec(library.plsp))
+```
+
 <br>
 <br>
 
