@@ -42,6 +42,17 @@
     )
 )
 (
+    def (dec)(1)(
+        (set (__dec)(args(0)))
+        (set(
+            get(__dec)
+        )(
+            -(1)(get(get(__dec)))
+        ))
+        (return(0))
+    )
+)
+(
     def (input)(1)(
         (set (__printtmp)(args(0)))
         (print (get(__printtmp)))
