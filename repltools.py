@@ -6,18 +6,26 @@ completer = [
     "print",
     "set",
     "get",
-    "swap",
     "call",
     "if",
     "def",
     "loop",
     "drop",
     "exec",
-    "set!",
     "==",
     "!=",
     ">=",
-    "<="
+    "<=",
+    "sys",
+    "return",
+    "args",
+    "in",
+    "abs",
+    "pow",
+    "println",
+    "inc",
+    "input",
+    "cls"
 ]
 def repl():
     from plsp import progtree,recurse,load
@@ -33,7 +41,9 @@ def repl():
     from pygments.styles import get_style_by_name    
     from prompt_toolkit.shortcuts import ProgressBar
     from prompt_toolkit.shortcuts import clear
-    libs = ["std.plsp","test.plsp","repl.plsp"]
+    from prompt_toolkit.output.color_depth import ColorDepth
+
+    libs = ["std.plsp","repl.plsp"]
     clear()
     print("Loading librarys")
     with ProgressBar() as pb:
@@ -44,13 +54,14 @@ def repl():
             os.remove("repl.tmp")
             i = progtree(prg)
             recurse(i)
-    style = style_from_pygments_cls(get_style_by_name('gruvbox-dark'))
+    style = style_from_pygments_cls(get_style_by_name('monokai'))
+    
     def bottom_toolbar():
         return
     session = PromptSession(history = FileHistory(expanduser('~/.plisphistory')),)
     while True:
         x = session.prompt('plisp → ',completer=WordCompleter(completer,ignore_case=True),
-                        complete_while_typing=True, style=style)
+                        complete_while_typing=True, style=style, auto_suggest=AutoSuggestFromHistory(), color_depth=ColorDepth.TRUE_COLOR)
         if x == "exit":
             exit(0)
         with open("repl.tmp","w") as t:

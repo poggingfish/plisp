@@ -36,7 +36,8 @@ tokens = {
     "STRONGSET": 27,
     "RETURN": 28,
     "SETPOP": 29,
-    "ARGS": 30
+    "ARGS": 30,
+    "SYS": 31
 }
 vars = {}
 funcs = {}
@@ -112,6 +113,8 @@ def load(program):
                 toks.append(tokens["SETPOP"])
             elif i == "args":
                 toks.append(tokens["ARGS"])
+            elif i == "sys":
+                toks.append(tokens["SYS"])
             else:
                 
                 try:
@@ -224,10 +227,6 @@ def recurse(tree, args=[]):
              macro = tree[t+2]
              macros.update({name:macro})
              t+=2
-        elif i == tokens["RETURN"]:
-            setret(recurse(tree[t+1]))
-            t+=1
-            return retval
         elif type(i) == list:
             y = recurse(i)
             if y != None:
@@ -293,10 +292,8 @@ def recurse(tree, args=[]):
         recurse(i)
         return
     elif op == "SWAP":
-        x = stack.pop()
-        y = stack.pop()
-        stack.append(x)
-        return y
+        print("SWAP has been deprecated")
+        raise DeprecationWarning
     elif op == "INPUT":
         return decimal.Decimal(input())
     elif op == "SET":
@@ -308,6 +305,12 @@ def recurse(tree, args=[]):
         x = stack.pop()
         args = previous_args
         return args[int(x)]
+    elif op == "SYS":
+        os.system(stack.pop())
+        return
+    elif op == "RETURN":
+        setret(stack.pop())
+        return getret()
 def full():
     if len(sys.argv) < 2:
         import repltools
