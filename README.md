@@ -27,7 +27,14 @@ sudo python3 install.py
     +(5)(2)
 )
 ```
-
+## If statement:
+```
+(
+    if(==)(1)(1)
+        (print(True\n))
+        (print(False\n))
+)
+```
 <br>
 <br>
 
