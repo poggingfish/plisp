@@ -59,3 +59,15 @@
         (return(in))
     )
 )
+(def(+=)(2)(
+    (set (__pe)(args(0)))
+    (set (__amount)(args(1)))
+    (loop(get(__amount))(
+        (set(
+            get(__pe)
+        )(
+            +(get(get(__pe)))(1)
+        ))   
+    ))
+    (return(get(__amount)))
+))
