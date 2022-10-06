@@ -25,7 +25,7 @@ completer = [
     "println",
     "inc",
     "input",
-    "cls"
+    "cls",
 ]
 def repl():
     from plsp import progtree,recurse,load

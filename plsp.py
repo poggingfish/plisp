@@ -37,7 +37,14 @@ tokens = {
     "RETURN": 28,
     "SETPOP": 29,
     "ARGS": 30,
-    "SYS": 31
+    "SYS": 31,
+    "EXIT": 32,
+    
+    "NEWARRAY": 33,
+    "APPEND": 34,
+    "POP": 35,
+    "INDEX": 36,
+    "SETINDEX": 37
 }
 vars = {}
 funcs = {}
@@ -115,6 +122,18 @@ def load(program):
                 toks.append(tokens["ARGS"])
             elif i == "sys":
                 toks.append(tokens["SYS"])
+            elif i == "exit":
+                toks.append(tokens["EXIT"])
+            elif i == "newarr":
+                toks.append(tokens["NEWARRAY"])
+            elif i == "append":
+                toks.append(tokens["APPEND"])
+            elif i == "pop":
+                toks.append(tokens["POP"])
+            elif i == "index":
+                toks.append(tokens["INDEX"])
+            elif i == "setindex":
+                toks.append(tokens["SETINDEX"])
             else:
                 
                 try:
@@ -311,6 +330,30 @@ def recurse(tree, args=[]):
     elif op == "RETURN":
         setret(stack.pop())
         return getret()
+    elif op == "EXIT":
+        exit(stack.pop())
+    elif op == "NEWARRAY":
+        x = stack.pop()
+        vars.update({x:[]})
+        return
+    elif op == "APPEND":
+        x = stack.pop()
+        y = stack.pop()
+        vars[y].append(x)
+        return
+    elif op == "INDEX":
+            x = stack.pop()
+            y = stack.pop()
+            return vars[y][int(x)]
+    elif op == "SETINDEX":
+            z = stack.pop()
+            x = stack.pop()
+            y = stack.pop()
+            vars[y][int(x)] = z
+            return
+    elif op == "POP":
+            x = stack.pop()
+            return vars[x].pop()
 def full():
     if len(sys.argv) < 2:
         import repltools
