@@ -10,16 +10,16 @@ try:
 except FileExistsError:
     pass
 print("INFO: Created library dir")
-std = ["std/std.plsp","std/test.plsp","std/repl.plsp"]
+std = ["std/std.plsp","std/test.plsp","std/repl.plsp","std/types","std/types.plsp"]
 t = list(filter(lambda s: s.find('packages') > -1, sys.path))[0]
 os.system(f"cp repltools.py {t}")
 print(f"INFO: ./repltools.py -> {t}")
 os.system(f"cp plsp.py {t}")
 print(f"INFO: ./plsp.py -> {t}")
 for x in std:
-    os.system(f"cp ./{x} /usr/share/plisp")
+    os.system(f"cp -r ./{x} /usr/share/plisp")
     print(f"INFO: ./{x} -> /usr/share/plisp/{x}")
-os.system("cp ./plsp.py /usr/bin/plisp")
+os.system("cp -r ./plsp.py /usr/bin/plisp")
 os.system("chmod +xrw /usr/bin/plisp")
 try:
     x = subprocess.check_output(["plisp","testlang.plsp"])

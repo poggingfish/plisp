@@ -1,0 +1,22 @@
+(
+    def(bit.new)(1)(
+        (set(__bitname)(args(0)))
+        (set(get(__bitname))(0))
+        (return(0))
+    )
+)
+(
+    def(bit.on)(1)(
+        (set(__bitname)(args(0)))
+        (set(get(__bitname))(1))
+        (return(0))
+    )
+
+)
+(
+    def(bit.off)(1)(
+        (set(__bitname)(args(0)))
+        (set(get(__bitname))(0))
+        (return(0))
+    )
+)

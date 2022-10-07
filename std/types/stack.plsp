@@ -1,0 +1,17 @@
+(
+    def (stack.new)(1)(
+        (newarr(args(0)))
+        (return(0))
+    )
+)
+(
+    def(stack.push)(2)(
+        (append(args(0))(args(1)))
+        (return(0))
+    )
+)
+(
+    def(stack.pop)(1)(
+        (return(pop(args(0))))
+    )
+)
