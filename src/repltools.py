@@ -26,9 +26,15 @@ completer = [
     "inc",
     "input",
     "cls",
+    "bit.new",
+    "bit.on",
+    "bit.off",
+    "stack.new",
+    "stack.push",
+    "stack.pop"
 ]
 def repl():
-    from src.plsp import progtree,recurse,load
+    from plsp import progtree,recurse,load
     import sys
     from os.path import expanduser
     if len(sys.argv) <= 1:
