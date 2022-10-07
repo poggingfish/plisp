@@ -1,3 +1,4 @@
+#!/usr/bin/env plisp
 (exec(std.plsp))
 (
     (set(rows)(input(Rows:\s)))
@@ -11,7 +12,7 @@
                 -(get(ctr))(get(rows))
             ))
         )
-        (loop(get(loops))(
+        (loop(-(1)(get(loops)))(
             print(\s)
         ))
         (loop (+(*(2)(get(ctr)))(1))(

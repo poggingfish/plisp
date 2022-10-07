@@ -1,3 +1,4 @@
+#!/usr/bin/env plisp
 (exec(std.plsp))
 (
     (set(num1)(input(First\s number:)))
