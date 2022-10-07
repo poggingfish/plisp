@@ -1,19 +1,22 @@
 (set (passed)(0))
 (set (failed)(0))
+(set (test_flag_print)(1))
 (def (test_pass)(1)(
     (set(name)(args(0)))
-    (print(Test\s))
-    (print(get(name)))
-    (print(\spassed!\n))
-    (set(passed)(+(get(passed))(1)))
+    (if(==)(get(test_flag_print))(1)(
+        (print(Test\s))
+        (print(get(name)))
+        (print(\spassed\n))
+    )())
     (return(0))
 ))
 (def (test_failed)(1)(
     (set(name)(args(0)))
-    (print(Test\s))
-    (print(get(name)))
-    (print(\sFailed\s\n))
-    (set(passed)(+(get(passed))(1)))
+    (if(==)(get(test_flag_print))(1)(
+        (print(Test\s))
+        (print(get(name)))
+        (print(\sfailed.\n))
+    )())
     (return(0))
 ))
 (def (test)(3) (
@@ -21,14 +24,10 @@
     (set(var)(args(1)))
     (set(name)(args(2)))
     (if (==) (get(get(var))) (get(expected)) (
-        (print(\wTest\s))
-        (print(get(name)))
-        (print(\spassed\n))
+        (test_pass(get(name)))
         (set(passed)(+(get(passed))(1)))
     )(
-        (print(\wTest\s))
-        (print(get(name)))
-        (print(\sfailed\n))
+        (test_failed(get(name)))
         (set(failed)(+(get(failed))(1)))
     ))
     (return(0))

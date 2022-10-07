@@ -1,6 +1,7 @@
 (exec (std.plsp))
 (exec (test.plsp))
 (exec (types.plsp))
+(set (test_flag_print)(1))
 (set (test1)(+(3)(2)))
 (set (test2)(+(+(5)(2))(2)))
 (set (test3)(*(5)(*(*(3)(4))(5))))
