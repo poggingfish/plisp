@@ -356,7 +356,7 @@ def recurse(tree, args=[]):
             return vars[x].pop()
 def full():
     if len(sys.argv) < 2:
-        import repltools
+        import src.repltools as repltools
         repltools.repl()
     program = load(sys.argv[1])
     i = progtree(program)

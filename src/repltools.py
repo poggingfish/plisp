@@ -28,7 +28,7 @@ completer = [
     "cls",
 ]
 def repl():
-    from plsp import progtree,recurse,load
+    from src.plsp import progtree,recurse,load
     import sys
     from os.path import expanduser
     if len(sys.argv) <= 1:
