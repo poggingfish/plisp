@@ -10,7 +10,7 @@
 (
     (set(ctr)(1))
     (newarr(nums))
-    (loop(99)(
+    (loop(999)(
         (if(==)(%(5)(get(ctr)))(0)(
             append(nums)(get(ctr))
         )((if(==)(%(3)(get(ctr)))(0)(
