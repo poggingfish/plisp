@@ -69,7 +69,7 @@
     )
     (return(0))
 ))
-(def(+=)(2)(
+(def(-=)(2)(
     (set (__pe)(args(0)))
     (set (__amount)(args(1)))
     (
