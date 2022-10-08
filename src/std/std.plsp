@@ -94,6 +94,20 @@
         ))
     )
 )
+(def (*=)(2)(
+    (set (__pe)(args(0)))
+    (set (__amount)(args(1)))
+    (set (get(__pe))(
+        *(get(__amount))(get(get(__pe)))
+    ))
+))
+(def (/=)(2)(
+    (set (__pe)(args(0)))
+    (set (__amount)(args(1)))
+    (set (get(__pe))(
+        /(get(__amount))(get(get(__pe)))
+    ))
+))
 (
     def(#)(1)()
 )
