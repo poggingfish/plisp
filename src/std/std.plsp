@@ -62,26 +62,22 @@
 (def(+=)(2)(
     (set (__pe)(args(0)))
     (set (__amount)(args(1)))
-    (loop(get(__amount))(
-        (set(
-            get(__pe)
-        )(
-            +(get(get(__pe)))(1)
-        ))   
-    ))
-    (return(get(__amount)))
+    (
+        set(get(__pe))(
+            +(get(get(__pe)))(get(__amount))
+        )
+    )
+    (return(0))
 ))
-(def(-=)(2)(
+(def(+=)(2)(
     (set (__pe)(args(0)))
     (set (__amount)(args(1)))
-    (loop(get(__amount))(
-        (set(
-            get(__pe)
-        )(
-            -(1)(get(get(__pe)))
-        ))   
-    ))
-    (return(get(__amount)))
+    (
+        set(get(__pe))(
+            -(get(__amount))(get(get(__pe)))
+        )
+    )
+    (return(0))
 ))
 (
     def(root)(2)(

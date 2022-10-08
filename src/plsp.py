@@ -52,7 +52,9 @@ tokens = {
     "EXPR": 40,
     "STR": 41,
     
-    "FOR": 42
+    "FOR": 42,
+    
+    "FLOAT": 43
 }
 vars = {}
 funcs = {}
@@ -152,6 +154,8 @@ def load(program):
                 toks.append(tokens["STR"])
             elif i == "for":
                 toks.append(tokens["FOR"])
+            elif i == "float":
+                toks.append(tokens["FLOAT"])
             else:
                 
                 try:
@@ -183,6 +187,7 @@ def progtree(program):
     return i
 previous_args = []
 retval = 0
+mfloat = False
 def getret():
     global retval
     return retval
@@ -191,6 +196,7 @@ def setret(val):
     retval=val
 def recurse(tree, args=[]):
     global retval
+    global mfloat
     global imports
     global previous_args
     global recurses
@@ -289,7 +295,10 @@ def recurse(tree, args=[]):
             for y in tokens: 
                 if tokens[y] == i:op = y
             if op == "INT":
-                return decimal.Decimal(tree[t+1].replace("i",""))
+                if mfloat == False:
+                    return decimal.Decimal(tree[t+1].replace("i",""))
+                else:
+                    return float(tree[t+1].replace("i",""))
             elif op == "VAR":
                 if tree[t+1][1:] in funcs:
                     func = tree[t+1][1:]
@@ -350,7 +359,10 @@ def recurse(tree, args=[]):
         print("SWAP has been deprecated")
         raise DeprecationWarning
     elif op == "INPUT":
-        return decimal.Decimal(input())
+        if mfloat != True:
+            return decimal.Decimal(input())
+        else:
+            return float(input())
     elif op == "SET":
         x = stack.pop()
         y = stack.pop()
@@ -398,6 +410,8 @@ def recurse(tree, args=[]):
     elif op == "STR":
         x = stack.pop()
         return str(x)
+    elif op == "FLOAT":
+        mfloat = True
 def full():
     if len(sys.argv) < 2:
         import repltools as repltools

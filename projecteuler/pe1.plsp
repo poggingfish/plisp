@@ -1,0 +1,22 @@
+(exec(std.plsp))
+(def(sum)(1)(
+    (set(_sum)(0))
+    (for(args(0))(y)(
+        (+=(_sum)(get(y)))
+    ))
+    (return(get(_sum)))
+))
+
+(
+    (set(ctr)(1))
+    (newarr(nums))
+    (loop(999)(
+        (if(==)(%(5)(get(ctr)))(0)(
+            append(nums)(get(ctr))
+        )((if(==)(%(3)(get(ctr)))(0)(
+            append(nums)(get(ctr))
+        )())))
+        (inc(ctr))
+    ))
+    (print(sum(nums)))
+)

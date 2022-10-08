@@ -1,0 +1,39 @@
+(exec(std.plsp))
+(def(sum)(1)(
+    (set(_sum)(0))
+    (for(args(0))(y)(
+        (+=(_sum)(get(y)))
+    ))
+    (return(get(_sum)))
+))
+(def(_fib)(0)(
+    (set(_fib1)(index(fib)(0)))
+    (set(_fib2)(index(fib)(1)))
+    (set(_sum)(+(get(_fib1))(get(_fib2))))
+    (newarr(fib))
+    (append(fib)(get(_fib2)))
+    (append(fib)(get(_sum)))
+    (append(fibs)(get(_sum)))
+))
+(def(removeodd)(0)(
+    (set(old)(get(fibs)))
+    (newarr(fibs))
+    (for(old)(x)(
+        (if(==)(%(2)(get(x)))(0)(
+            (append(fibs)(get(x)))
+        )())
+    ))
+))
+(
+    (newarr(fib))
+    (newarr(fibs))
+    (append(fib)(1))
+    (append(fib)(2))
+    (append(fibs)(1))
+    (append(fibs)(2))
+    (loop(32)(
+        (_fib)
+    ))
+    (removeodd)
+    (println(sum(fibs)))
+)
