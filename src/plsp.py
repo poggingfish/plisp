@@ -4,6 +4,7 @@ import decimal
 import os
 import time
 recurses = 0
+imports = []
 histfile = os.path.join(os.path.expanduser("~"), ".plisp-history")
 tokens = {
     "RBRACKET": 0,
@@ -44,7 +45,14 @@ tokens = {
     "APPEND": 34,
     "POP": 35,
     "INDEX": 36,
-    "SETINDEX": 37
+    "SETINDEX": 37,
+    
+    "ESTR": 38,
+    "REPLACE": 39,
+    "EXPR": 40,
+    "STR": 41,
+    
+    "FOR": 42
 }
 vars = {}
 funcs = {}
@@ -134,6 +142,16 @@ def load(program):
                 toks.append(tokens["INDEX"])
             elif i == "setindex":
                 toks.append(tokens["SETINDEX"])
+            elif i == "estr":
+                toks.append(tokens["ESTR"])
+            elif i == "expr":
+                toks.append(tokens["EXPR"])
+            elif i == "replace":
+                toks.append(tokens["REPLACE"])
+            elif i == "str":
+                toks.append(tokens["STR"])
+            elif i == "for":
+                toks.append(tokens["FOR"])
             else:
                 
                 try:
@@ -173,6 +191,7 @@ def setret(val):
     retval=val
 def recurse(tree, args=[]):
     global retval
+    global imports
     global previous_args
     global recurses
     global vars
@@ -246,6 +265,22 @@ def recurse(tree, args=[]):
              macro = tree[t+2]
              macros.update({name:macro})
              t+=2
+        elif i == tokens["ESTR"]:
+            t+=1
+            return str(tree[t])
+        elif i == tokens["EXPR"]:
+            t+=1
+            i = recurse(tree[t])
+            i = eval(i)
+            return recurse(i)
+        elif i == tokens["FOR"]:
+            var = recurse(tree[t+1])
+            outvar = recurse(tree[t+2])
+            function = tree[t+3]
+            for i in vars[var]:
+                vars.update({outvar:i})
+                recurse(function)
+            return
         elif type(i) == list:
             y = recurse(i)
             if y != None:
@@ -268,7 +303,7 @@ def recurse(tree, args=[]):
                     recurse(funcs[func]["func"])
                     return getret()
                 else:
-                    return tree[t+1][1:]
+                    return tree[t+1][1:].replace("\s"," ").replace("\w","").replace("\_rb","(").replace("\_lb",")")
         t+=1 
     if op == "PLUS":
         return (stack.pop()+stack.pop())
@@ -284,8 +319,6 @@ def recurse(tree, args=[]):
         return (stack.pop()**stack.pop())
     elif op == "PRINT":
         x = stack.pop()
-        if type(x) == str:
-            x = x.replace("\s"," ").replace("\w","")
         print(x,end="")
         return x
     elif op == "GET":
@@ -306,9 +339,12 @@ def recurse(tree, args=[]):
         stack.pop()
         return
     elif op == "EXEC":
-        x = load(stack.pop())
-        i = progtree(x)
-        recurse(i)
+        y = stack.pop()
+        if y not in imports:
+            x = load(y)
+            i = progtree(x)
+            recurse(i)
+            imports.append(y)
         return
     elif op == "SWAP":
         print("SWAP has been deprecated")
@@ -342,18 +378,26 @@ def recurse(tree, args=[]):
         vars[y].append(x)
         return
     elif op == "INDEX":
-            x = stack.pop()
-            y = stack.pop()
-            return vars[y][int(x)]
+        x = stack.pop()
+        y = stack.pop()
+        return vars[y][int(x)]
     elif op == "SETINDEX":
-            z = stack.pop()
-            x = stack.pop()
-            y = stack.pop()
-            vars[y][int(x)] = z
-            return
+        z = stack.pop()
+        x = stack.pop()
+        y = stack.pop()
+        vars[y][int(x)] = z
+        return
     elif op == "POP":
-            x = stack.pop()
-            return vars[x].pop()
+        x = stack.pop()
+        return vars[x].pop()
+    elif op == "REPLACE":
+        x = stack.pop()
+        z = stack.pop()
+        y = stack.pop()
+        return y.replace(x,z)
+    elif op == "STR":
+        x = stack.pop()
+        return str(x)
 def full():
     if len(sys.argv) < 2:
         import repltools as repltools

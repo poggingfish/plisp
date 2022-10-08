@@ -10,7 +10,7 @@ try:
 except FileExistsError:
     pass
 print("INFO: Created library dir")
-std = ["std/std.plsp","std/test.plsp","std/repl.plsp","std/types","std/types.plsp"]
+std = ["std/std.plsp","std/test.plsp","std/repl.plsp","std/types","std/types.plsp","std/math"]
 t = list(filter(lambda s: s.find('packages') > -1, sys.path))[0]
 os.system(f"cp ./src/repltools.py {t}")
 print(f"INFO: ./src/repltools.py -> {t}/repltools.py")

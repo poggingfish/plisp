@@ -1,6 +1,7 @@
 (exec (std.plsp))
 (exec (test.plsp))
 (exec (types.plsp))
+(exec (math/proof.plsp))
 (set (test_flag_print)(1))
 (set (test1)(+(3)(2)))
 (set (test2)(+(+(5)(2))(2)))
@@ -40,6 +41,19 @@
 (stack.push(t)(5))
 (set(test15)(stack.pop(t)))
 
+(set(test16)(provex(estr(+(x)(x)))(estr(*(x)(2)))(200)))
+(set(test17)(
+    provexy(estr(
+        ^(+(x)(y))(2)
+    )
+    )(estr(
+        +(
+            ^(x)(2)
+        )(
+            ^(y)(2)
+        )
+    ))
+))
 (test(5)(test1)(\wAddition))
 (test(9)(test2)(\wAddition\s2))
 (test(300)(test3)(\wMultiplication))
@@ -55,4 +69,6 @@
 (test(1)(test13)(\wBit\sOn))
 (test(0)(test14)(\wBit\sOff))
 (test(5)(test15)(\wStack\sPush/Pop))
+(test(1)(test16)(\wx+x=x*2))
+(test(0)(test17)(\wx²+y²!=\_rbx+y\_lb²))
 (results)

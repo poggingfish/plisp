@@ -1,0 +1,140 @@
+(exec(std.plsp))
+(#(Proof Helping for Plisp))
+(def (provex)(3)(
+    (set(first)(args(0)))
+    (set(second)(args(1)))
+    (set(i)(args(2)))
+    (set(true)(0))
+    (set(false)(0))
+    (set(ctr1)(0))
+    (loop(get(i))(
+        (+=(ctr1)(1.5334))
+        (set(temp)(\w6,\s\'i))
+        (set(temp)(
+            +(str(get(ctr1)))(get(temp))
+        ))
+        (set(temp)(
+            +(\w\')(get(temp))
+        ))
+        (
+        (set(ffirst)(replace(
+            get(first)
+        )(
+            get(temp)
+        )(
+            9,\s \'vx\'
+        )))
+        (set(fsecond)(replace(
+            get(second)
+        )(
+            get(temp)
+        )(
+            9,\s \'vx\'
+        ))
+        )
+        )
+        (
+            (if(==)(
+                expr(get(ffirst))
+            )(
+                expr(get(fsecond))
+            )(
+                inc(true)
+            )(
+                inc(false)
+            ))
+        )))(
+            (if(==)(get(false))(0)(
+                (return(1))
+            )(
+                (return(0))
+            ))
+        )
+    )
+)
+(
+    def(provexy)(2)(
+        (set(true)(0))
+        (set(false)(0))
+        (set(temp)(\w6,\s\'i))
+        (set(first)(args(0)))
+        (set(second)(args(1)))
+        (newarr(_x))
+        (newarr(_y))
+        (append(_x)(3.2))
+        (append(_x)(6.234))
+        (append(_x)(2.523))
+        (append(_x)(223949.59))
+        (append(_x)(0.59))
+        (append(_y)(1.65))
+        (append(_y)(5.1823))
+        (append(_y)(9.3848))
+        (append(_y)(252312.59))
+        (append(_y)(0.239))
+        (for (_x)(i)(
+            (for (_y)(t)(
+                (set(temp)(\w6,\s\'i))
+                (set(temp)(
+                    +(str(get(i)))(get(temp))
+                ))
+                (set(temp)(
+                    +(\w\')(get(temp))
+                ))
+                (set(ffirst)(replace(
+                    get(first)
+                )(
+                    get(temp)
+                )(
+                    9,\s \'vx\'
+                )))
+                (set(fsecond)(replace(
+                    get(second)
+                )(
+                    get(temp)
+                )(
+                    9,\s \'vx\'
+                ))
+                )
+                (set(temp)(\w6,\s\'i))
+                (set(temp)(
+                    +(str(get(t)))(get(temp))
+                ))
+                (set(temp)(
+                    +(\w\')(get(temp))
+                ))
+                (set(ffirst)(replace(
+                    get(ffirst)
+                )(
+                    get(temp)
+                )(
+                    9,\s \'vy\'
+                )))
+                (set(fsecond)(replace(
+                    get(fsecond)
+                )(
+                    get(temp)
+                )(
+                    9,\s \'vy\'
+                ))
+                )
+                (if(==)(
+                    expr(get(ffirst))
+                )(
+                    expr(get(fsecond))
+                )(
+                    inc(true)
+                )(
+                    inc(false)
+                ))
+                )
+            )
+        ))
+        (
+            (if(==)(get(false))(0)(
+                (return(1))
+            )(
+                (return(0))
+            ))
+        )
+    )
+)
