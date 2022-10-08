@@ -6,7 +6,6 @@ completer = [
     "print",
     "set",
     "get",
-    "call",
     "if",
     "def",
     "loop",
@@ -20,21 +19,15 @@ completer = [
     "return",
     "args",
     "in",
-    "abs",
-    "pow",
-    "println",
-    "inc",
-    "input",
-    "cls",
-    "bit.new",
-    "bit.on",
-    "bit.off",
-    "stack.new",
-    "stack.push",
-    "stack.pop"
+    "newarr",
+    "str",
+    "pop",
+    "index",
+    "setindex",
+    "append"
 ]
 def repl():
-    from plsp import progtree,recurse,load
+    from plsp import progtree,recurse,load,funcs
     import sys
     from os.path import expanduser
     if len(sys.argv) <= 1:
@@ -60,6 +53,9 @@ def repl():
             os.remove("repl.tmp")
             i = progtree(prg)
             recurse(i)
+    for i in funcs:
+        if i not in completer:
+            completer.append(i)
     style = style_from_pygments_cls(get_style_by_name('monokai'))
     
     def bottom_toolbar():
@@ -79,3 +75,6 @@ def repl():
             print("\n"+str(recurse(i)))
         except:
             print("error.")
+        for i in funcs:
+            if i not in completer:
+                completer.append(i)
