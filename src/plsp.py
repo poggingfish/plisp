@@ -142,7 +142,7 @@ def load(program):
                 toks.append(tokens["INDEX"])
             elif i == "setindex":
                 toks.append(tokens["SETINDEX"])
-            elif i == "estr":
+            elif i == "e":
                 toks.append(tokens["ESTR"])
             elif i == "expr":
                 toks.append(tokens["EXPR"])

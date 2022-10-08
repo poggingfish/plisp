@@ -41,12 +41,11 @@
 (stack.push(t)(5))
 (set(test15)(stack.pop(t)))
 
-(set(test16)(provex(estr(+(x)(x)))(estr(*(x)(2)))(200)))
+(set(test16)(provex(e(+(x)(x)))(e(*(x)(2)))))
 (set(test17)(
-    provexy(estr(
+    provexy(e(
         ^(+(x)(y))(2)
-    )
-    )(estr(
+    ))(e(
         +(
             ^(x)(2)
         )(
