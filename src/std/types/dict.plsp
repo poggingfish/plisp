@@ -1,0 +1,59 @@
+(exec(std.plsp))
+
+(
+    def(dict.new)(1)(
+        (set(_dictname)(args(0)))
+        (newarr(get(_dictname)))
+        (set(_dictname2)(
+            +(\wvals)(get(_dictname))
+        ))
+        (newarr(get(_dictname2)))
+        (return(0))
+    )
+)
+(
+    def(dict.update)(3)(
+        (set(_dictname)(args(0)))
+        (set(_key)(args(1)))
+        (set(_value)(args(2)))
+        (set(_ctr)(0))
+        (set(_dictname2)(
+            +(\wvals)(get(_dictname))
+        ))
+        (set(_get)(-1))
+        (for(get(_dictname))(_x)(
+            (if(==)(get(_x))(get(_key))(
+                (set(_get)(get(_ctr)))
+            )())
+            (inc(_ctr))
+        ))
+        (if(!=)(get(_get))(-1)(
+            (setindex(get(_dictname))(get(_get))(get(_key)))
+            (setindex(get(_dictname2))(get(_get))(get(_value)))
+        )(
+            (append(get(_dictname))(get(_key)))
+            (append(get(_dictname2))(get(_value)))
+        ))
+        (return(0))
+    )
+)
+(
+    def(dict.get)(2)(
+        (set(_dictname)(args(0)))
+        (set(_key)(args(1)))
+        (set(_ctr)(0))
+        (set(_get)(-1))
+        (set(_dictname2)(
+            +(\wvals)(get(_dictname))
+        ))
+        (for(get(_dictname))(_x)(
+            (if(==)(get(_x))(get(_key))(
+                (set(_get)(get(_ctr)))
+            )())
+            (inc(_ctr))
+        ))
+        (return(
+            index(get(_dictname2))(get(_get))
+        ))
+    )
+)

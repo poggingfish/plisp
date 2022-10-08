@@ -1,2 +1,3 @@
 (exec(types/bit.plsp))
 (exec(types/stack.plsp))
+(exec(types/dict.plsp))
