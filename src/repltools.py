@@ -49,7 +49,7 @@ def repl():
     from prompt_toolkit.shortcuts import clear
     from prompt_toolkit.output.color_depth import ColorDepth
 
-    libs = ["std.plsp","repl.plsp","types.plsp"]
+    libs = ["std.plsp","repl.plsp","types.plsp","math/proof.plsp"]
     clear()
     print("Loading librarys")
     with ProgressBar() as pb:

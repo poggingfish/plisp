@@ -1,6 +1,11 @@
 (
     def(cls)(0)(
-        (sys(clear))
+        (sys(\wclear))
         (return(0))
+    )
+)
+(
+    def(clear)(0)(
+        (cls)
     )
 )
