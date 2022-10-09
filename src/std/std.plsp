@@ -107,3 +107,13 @@
 (
     def(#)(1)()
 )
+(
+    def(int)(1)(
+        (set(_stringint)(args(0)))
+        (set(_expr)(
+                +('])(+(get(_stringint))([6,\s'i))
+            )
+        )
+        (return(expr(get(_expr))))
+    )
+)
