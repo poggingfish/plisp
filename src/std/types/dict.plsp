@@ -57,3 +57,26 @@
         ))
     )
 )
+(
+    def(dict.export)(1)(
+        (set(_dictname)(args(0)))
+        (set(_dictname2)(
+            +(\wvals)(get(_dictname))
+        ))
+        (newarr(_export))
+        (append(_export)(get(get(_dictname))))
+        (append(_export)(get(get(_dictname2))))
+        (return(get(_export)))
+    )
+)
+(
+    def(dict.import)(2)(
+        (set(_dictname)(args(0)))
+        (set(_exported)(args(1)))
+        (set(_dictname2)(
+            +(\wvals)(get(_dictname))
+        ))
+        (set(get(_dictname))(index(_exported)(0)))
+        (set(get(_dictname2))(index(_exported)(1)))
+    )
+)

@@ -3,6 +3,7 @@ import sys
 import decimal
 import os
 import time
+import re as regex
 recurses = 0
 imports = []
 histfile = os.path.join(os.path.expanduser("~"), ".plisp-history")
@@ -54,7 +55,9 @@ tokens = {
     
     "FOR": 42,
     
-    "FLOAT": 43
+    "FLOAT": 43,
+    "SPLIT": 44,
+    "REGEX": 45
 }
 vars = {}
 funcs = {}
@@ -154,6 +157,10 @@ def load(program):
                 toks.append(tokens["FOR"])
             elif i == "float":
                 toks.append(tokens["FLOAT"])
+            elif i == "split":
+                toks.append(tokens["SPLIT"])
+            elif i == "regex":
+                toks.append(tokens["REGEX"])
             else:
                 
                 try:
@@ -310,7 +317,9 @@ def recurse(tree, args=[]):
                     recurse(funcs[func]["func"])
                     return getret()
                 else:
-                    return tree[t+1][1:].replace("\s"," ").replace("\w","").replace("\_rb","(").replace("\_lb",")")
+                    return tree[t+1][1:].replace("\s"," ").replace("\w","").replace("\_rb","(").replace("\_lb",")").replace(
+                        "\_w","\w"
+                    ).replace("\_s","\s")
         t+=1 
     if op == "PLUS":
         return (stack.pop()+stack.pop())
@@ -410,6 +419,14 @@ def recurse(tree, args=[]):
         return str(x)
     elif op == "FLOAT":
         mfloat = True
+    elif op == "SPLIT":
+        x = stack.pop()
+        y = stack.pop()
+        return y.split(x)
+    elif op == "REGEX":
+        x = stack.pop()
+        y = stack.pop()
+        return regex.findall(regex.compile(x),y)
 def full():
     if len(sys.argv) < 2:
         import repltools as repltools

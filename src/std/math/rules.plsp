@@ -8,12 +8,23 @@
     apply(swap)(e(x)(y))
 )))
 
-(def(rule)(3)(
-    (set(__arg1)(args(0)))
-    (set(__arg2)(args(1)))
-    (set(__arg3)(args(2)))
+(def(rule)(2)(
+    (set(__arg2)(args(0)))
+    (set(__arg3)(args(1)))
     (dict.new(_matched))
-    
+    (set(matched1)(regex(get(__arg2))(\_rb?<=\[9,\_s'\_lbv\_w*\_rb?='\]\_lb)))
+    (set(matched2)(regex(get(__arg3))(\_rb?<=\[9,\_s'\_lbv\_w*\_rb?='\]\_lb)))
+    (set(_ctr1)(0))
+    (for(matched1)(x)(
+        (dict.update(_matched)(get(x))(index(matched2)(get(_ctr1))))
+        (inc(_ctr1))
+    ))
+    (return(dict.export(_matched)))
 ))
-
-(rule(swap)(e((x)(y)))(e((y)(x))))
+(
+    println(rule(
+        e((x)(y))
+    )(
+        e((y)(x))
+    ))
+)
