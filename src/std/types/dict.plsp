@@ -42,7 +42,7 @@
         (set(_dictname)(args(0)))
         (set(_key)(args(1)))
         (set(_ctr)(0))
-        (set(_get)(-1))
+        (set(_get)(-1000))
         (set(_dictname2)(
             +(\wvals)(get(_dictname))
         ))

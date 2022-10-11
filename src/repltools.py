@@ -61,6 +61,13 @@ def repl():
     def bottom_toolbar():
         return
     session = PromptSession(history = FileHistory(expanduser('~/.plisphistory')),)
+    print("""
+ _ __ | (_)___ _ __  
+| '_ \| | / __| '_ \ 
+| |_) | | \__ \ |_) |
+| .__/|_|_|___/ .__/ 
+|_|           |_|
+Build: 24dc671""")
     while True:
         x = session.prompt('plisp → ',completer=WordCompleter(completer,ignore_case=True),
                         complete_while_typing=True, style=style, auto_suggest=AutoSuggestFromHistory(), color_depth=ColorDepth.TRUE_COLOR)

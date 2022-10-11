@@ -1,0 +1,19 @@
+(exec(std.plsp))
+(exec(types.plsp))
+(#(e(
+    Rule example
+    swap = x,y y,x
+
+    rule(swap)(e((x)(y)))(e((y)(x)))
+    apply(swap)(e(x)(y))
+)))
+
+(def(rule)(3)(
+    (set(__arg1)(args(0)))
+    (set(__arg2)(args(1)))
+    (set(__arg3)(args(2)))
+    (dict.new(_matched))
+    
+))
+
+(rule(swap)(e((x)(y)))(e((y)(x))))

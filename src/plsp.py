@@ -114,8 +114,6 @@ def load(program):
                 toks.append(tokens["DROP"])
             elif i == "exec":
                 toks.append(tokens["EXEC"])
-            elif i == "swap":
-                toks.append(tokens["SWAP"])
             elif i == "%":
                 toks.append(tokens["MOD"])
             elif i == "^":
@@ -419,6 +417,7 @@ def full():
     program = load(sys.argv[1])
     i = progtree(program)
     recurse(i)
+decimal.getcontext().prec = 100
 full()
 try:
     if sys.argv[2] == "--recurses":
