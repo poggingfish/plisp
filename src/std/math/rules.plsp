@@ -3,9 +3,6 @@
 (#(e(
     Rule example
     swap = x,y y,x
-
-    rule(swap)(e((x)(y)))(e((y)(x)))
-    apply(swap)(e(x)(y))
 )))
 
 (def(rule)(2)(
@@ -21,10 +18,39 @@
     ))
     (return(dict.export(_matched)))
 ))
+(def(apply)(2)(
+    (set(_target)(args(1)))
+    (dict.import(_matched)(args(0)))
+    (set(_matched1)(regex(get(_target))(\_rb?<=\[9,\_s'\_lbv\_w*\_rb?='\]\_lb)))
+    (set(_ctr1)(0))
+    (newarr(_matched2))
+    (dict.new(_matched3))
+    (for(_matched1)(x)(
+        (dict.update(_matched3)(
+            index(_matched)(get(_ctr1))
+        )(
+            get(x)
+        ))
+        (inc(_ctr1))
+    ))
+    (set(_ctr1)(0))
+    (for(_matched1)(x)(
+        (append(_matched2)(
+            dict.get(_matched)(index(_matched)(get(_ctr1)))
+        ))
+        (inc(_ctr1))
+    ))
+    (newarr(_matched4))
+    (for(_matched2)(x)(
+        append(_matched4)(dict.get(_matched3)(get(x)))
+    ))
+    (return(get(_matched4)))
+))
 (
-    println(rule(
-        e((x)(y))
+    set(swap)(rule(
+        e((x)(y)(z))
     )(
-        e((y)(x))
+        e((z)(y)(x))
     ))
 )
+((apply(get(swap))(e((x)(y)(z)))))

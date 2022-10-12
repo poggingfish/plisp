@@ -2,3 +2,4 @@ examples/pyramid.plsp
 __pycache__
 e.plsp
 .vscode/settings.json
+scratch.plsp
