@@ -117,3 +117,13 @@
         (return(expr(get(_expr))))
     )
 )
+(
+    def(int?)(1)(
+        if(==)(type(args(0)))(\wdecimal.Decimal)(return(1))(return(0))
+    )
+)
+(
+    def(str?)(1)(
+        if(==)(type(args(0)))(\wstr)(return(1))(return(0))
+    )
+)

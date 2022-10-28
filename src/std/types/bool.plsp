@@ -1,0 +1,2 @@
+(def (true)(0)(return(1)))
+(def (false)(0)(return (0)))

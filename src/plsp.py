@@ -57,7 +57,9 @@ tokens = {
     
     "FLOAT": 43,
     "SPLIT": 44,
-    "REGEX": 45
+    "REGEX": 45,
+    
+    "TYPE": 46
 }
 vars = {}
 funcs = {}
@@ -161,6 +163,8 @@ def load(program):
                 toks.append(tokens["SPLIT"])
             elif i == "regex":
                 toks.append(tokens["REGEX"])
+            elif i == "type":
+                toks.append(tokens["TYPE"])
             else:
                 
                 try:
@@ -427,6 +431,8 @@ def recurse(tree, args=[]):
         x = stack.pop()
         y = stack.pop()
         return regex.findall(regex.compile(x),y)
+    elif op == "TYPE":
+        return str(type(stack.pop())).split(" ")[1].split("'")[1]
 def full():
     if len(sys.argv) < 2:
         import repltools as repltools
