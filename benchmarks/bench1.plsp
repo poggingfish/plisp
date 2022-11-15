@@ -1,0 +1,3 @@
+(exec(types.plsp))
+(exec(std.plsp))
+(exec(test.plsp))

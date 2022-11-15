@@ -211,6 +211,7 @@ def recurse(tree, args=[]):
     global imports
     global previous_args
     global recurses
+    recurses+=1
     global vars
     stack = []
     op = ""
@@ -372,10 +373,7 @@ def recurse(tree, args=[]):
         print("SWAP has been deprecated")
         raise DeprecationWarning
     elif op == "INPUT":
-        if mfloat != True:
-            return decimal.Decimal(input())
-        else:
-            return float(input())
+        return input()
     elif op == "SET":
         x = stack.pop()
         y = stack.pop()

@@ -1,7 +1,7 @@
 #!/usr/bin/env plisp
 (exec(std.plsp))
 (
-    (set(rows)(input(Rows:\s)))
+    (set(rows)(int(input(Rows:\s))))
     (set(k)(0))
     (set(ctr)(0))
 )

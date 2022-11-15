@@ -1,5 +1,13 @@
 (def (math.pi)(0)(return(3.14159265358979323846)))
 (def (math.e)(0)(return (2.71828182845904523536)))
+(set (catch?)(0))
+(
+    def (throw)(1)(
+        (print(\wError!:\s))
+        (print(args(0)))
+        (if (==)(get(catch?))(0)(exit(1))())
+    )
+)
 (
     def (abs)(1)(
         (set (__abstmp)(args(0)))

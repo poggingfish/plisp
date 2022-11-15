@@ -1,0 +1,7 @@
+(exec(std.plsp))
+(exec(types.plsp))
+(
+    (dict.new(a))
+    (dict.update(a)(pog)(5))
+    (dict.get(a)(pog))
+)

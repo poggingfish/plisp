@@ -1,3 +1,4 @@
+from multiprocessing.sharedctypes import Value
 import os
 
 
@@ -67,10 +68,13 @@ def repl():
 | |_) | | \__ \ |_) |
 | .__/|_|_|___/ .__/ 
 |_|           |_|
-Commit: 49""")
+Commit: 50""")
     while True:
-        x = session.prompt('plisp → ',completer=WordCompleter(completer,ignore_case=True),
-                        complete_while_typing=True, style=style, auto_suggest=AutoSuggestFromHistory(), color_depth=ColorDepth.TRUE_COLOR)
+        try:
+            x = session.prompt('plisp → ',completer=WordCompleter(completer,ignore_case=True),
+                            complete_while_typing=True, style=style, auto_suggest=AutoSuggestFromHistory(), color_depth=ColorDepth.TRUE_COLOR)
+        except ValueError:
+            exit(1)
         if x == "exit":
             exit(0)
         with open("repl.tmp","w") as t:
@@ -80,7 +84,7 @@ Commit: 49""")
         i = progtree(prg)
         try:
             print("\n"+str(recurse(i)))
-        except:
+        except Exception as _:
             print("error.")
         for i in funcs:
             if i not in completer:
