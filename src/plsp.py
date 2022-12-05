@@ -442,10 +442,11 @@ def full():
     program = load(sys.argv[1])
     i = progtree(program)
     recurse(i)
-decimal.getcontext().prec = 100
-full()
-try:
-    if sys.argv[2] == "--recurses":
-        print("\nRecurses: "+ str(recurses))
-except:
-    pass
+if __name__ == "__main__":
+    decimal.getcontext().prec = 100
+    full()
+    try:
+        if sys.argv[2] == "--recurses":
+            print("\nRecurses: "+ str(recurses))
+    except:
+        pass
