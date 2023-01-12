@@ -9,6 +9,11 @@
     )
 )
 (
+    def (catch)(1)(
+        (set(catch(args(0)))
+    )
+)
+(
     def (abs)(1)(
         (set (__abstmp)(args(0)))
         (set (__abstmp2)(0))
