@@ -68,7 +68,7 @@ def repl():
 | |_) | | \__ \ |_) |
 | .__/|_|_|___/ .__/ 
 |_|           |_|
-Commit: 54""")
+Commit: 56""")
     while True:
         try:
             x = session.prompt('plisp → ',completer=WordCompleter(completer,ignore_case=True),
