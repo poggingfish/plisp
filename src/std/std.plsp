@@ -10,7 +10,7 @@
 )
 (
     def (catch)(1)(
-        (set(catch(args(0)))
+        (set(catch(args(0))))
     )
 )
 (
