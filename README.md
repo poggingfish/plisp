@@ -6,7 +6,7 @@
 ---
 
 ```
-sudo python3 install.py
+./install.sh
 ```
 ##### Run this is in same directory has the folder containing plsp.py
 <br>
